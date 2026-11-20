@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Captura de Datos</title>
+
+  <style>
+    *{
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  background: linear-gradient(135deg, #ffe5ef, #ffc5dc, #fff0f6);
+  padding: 20px;
+}
+
+h2 {
+  display: none;
+}
+
+form {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 60px 8%;
+  width: 100%;
+  min-height: calc(100vh - 40px);
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(214, 83, 145, 0.2);
+  border: 2px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form::before {
+  content: "🎀 🌸 💗";
+  display: block;
+  text-align: center;
+  font-size: 45px;
+  margin-bottom: 30px;
+}
+
+label {
+  color: #c45185;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 20px;
+  margin-top: 12px;
+  border: 2px solid #f5c1d7;
+  border-radius: 15px;
+  outline: none;
+  background: #fff8fb;
+  color: #a83e72;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #df79a8;
+  box-shadow: 0 0 10px #f7c3db;
+  background: white;
+}
+
+button {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #ed9cbe, #d95791);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(217, 87, 145, 0.2);
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(217, 87, 145, 0.3);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#estado {
+  position: fixed;
+  bottom: 25px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #d65391;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+iframe {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  form {
+    min-height: calc(100vh - 20px);
+    padding: 40px 7%;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <h2>Captura de Datos</h2>
+
+  <form id="formulario" action="https://script.google.com/macros/s/AKfycbx9Ksw_IZcmZtio7QlfNB0BQhg2sewqSCTwFrBMP3w9K95a7UpkF2dLldspIGH6glahYA/exec" method="POST" target="hidden_iframe" onsubmit="enviado()">
+    <label for="ingresanumerodedia">ingresa numero de dia:</label><br>
+    <input type="text" id="ingresanumerodedia" name="ingresanumerodedia" required><br><br>
+
+    <label for="ingresapreciodedolar">ingresa precio de dolar:</label><br>
+    <input type="text" id="ingresapreciodedolar" name="ingresapreciodedolar" required min="1" max="120"><br><br>
+
+    <button type="submit" id="btnEnviar">Enviar</button>
+  </form>
+
+  <p id="estado"></p>
+
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+  <script>
+    function enviado() {
+      document.getElementById('btnEnviar').disabled = true;
+      document.getElementById('estado').textContent = 'Guardando...';
+      
+      setTimeout(function() {
+        document.getElementById('estado').textContent = '¡Registro guardado con éxito!';
+        document.getElementById('formulario').reset();
+        document.getElementById('btnEnviar').disabled = false;
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
